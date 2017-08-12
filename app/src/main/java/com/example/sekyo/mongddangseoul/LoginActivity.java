@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -16,18 +17,22 @@ import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-
-import org.json.JSONObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
+    public static String address = "http://sekyo.cafe24app.com";
     Button loginButton;
     Button facebookLoginButton;
     Button signUpButton;
     EditText idText;
     EditText pwText;
+    EditText nameText;
+    EditText phoneText;
+    EditText mailText;
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     private List<String> permissionNeeds = Arrays.asList("email");
@@ -82,16 +87,37 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
-                startActivity(intent);
-                finish();
+                Ion.with(getApplicationContext())
+                        .load(address + "/sign_in")
+                        .setMultipartParameter("id",idText.getText().toString())
+                        .setMultipartParameter("pw",pwText.getText().toString())
+                        .asString()
+                        .setCallback(new FutureCallback<String>() {
+                            @Override
+                            public void onCompleted(Exception e, String result) {
+                                if(e == null) {
+                                    if(result.equals("ok")){
+                                        Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else if (result.equals("no_id")){
+                                        Toast.makeText(getApplicationContext(), "존재하지 않는 아이디입니다.", Toast.LENGTH_LONG).show();
+                                    } else if (result.equals("wrong_pw")){
+                                        Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
+                                    } else if (result.equals("db_error")){
+                                        Toast.makeText(getApplicationContext(), "서버 데이터베이스에 문제가 발생했습니다.", Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "네트워크 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
             }
         });
         facebookLoginButton.setOnClickListener(new View.OnClickListener() {

@@ -82,7 +82,7 @@
         android:layout_below="@id/sign_up_mail"
         android:layout_centerHorizontal="true">
         <Button
-            android:id="@+id/signup_now"
+            android:id="@+id/signup_cancel"
             style="@style/yelloButtonTheme"
             android:layout_below="@+id/sign_up_mail"
             android:layout_marginTop="15dp"
@@ -90,7 +90,7 @@
             android:textColor="@color/whiteColor" />
 
         <Button
-            android:id="@+id/signup_cancel"
+            android:id="@+id/signup_now"
             style="@style/greenButtonTheme"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
