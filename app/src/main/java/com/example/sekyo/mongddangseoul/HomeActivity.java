@@ -9,6 +9,7 @@ import android.os.Bundle;
 public class HomeActivity extends AppCompatActivity {
     ViewPager viewPager;
     TabAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +18,8 @@ public class HomeActivity extends AppCompatActivity {
         // Tab
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon));
         tabLayout.addTab(tabLayout.newTab().setIcon(
                 R.drawable.ic_home_white_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(

@@ -15,7 +15,7 @@
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_marginTop">5dp</item>
-        <item name="android:textColorHint">@color/hintTextColor</item>
+        <item name="android:textColorHint">@color/grayColor</item>
         <item name="android:singleLine">true</item>
         <item name="android:lines">1</item>
     </style>
@@ -23,12 +23,14 @@
     <style name="yelloButtonTheme" parent="@android:style/Widget.Button">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:background">@drawable/button_background_yellow</item>
     </style>
 
     <style name="greenButtonTheme" parent="@android:style/Widget.Button">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:background">@drawable/button_background_green</item>
     </style>
 
