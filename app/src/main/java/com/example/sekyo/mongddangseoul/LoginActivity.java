@@ -17,6 +17,8 @@ import com.facebook.LoggingBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,13 +41,24 @@ public class LoginActivity extends AppCompatActivity {
             FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
         }
         setContentView(R.layout.activity_login);
+        /*자동로그인시 바로 넘어가게해놓음*/
+//        if (AccessToken.getCurrentAccessToken() != null) { //이미 로그인 여부 확인//
+//            Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+//            startActivity(intent);
+//            finish();
+//            Log.d("Tag", "user id : " + AccessToken.getCurrentAccessToken().getUserId());
+//        } else {
+//            Log.d("Tag", "로그인을 하세요");
+//        }
         callbackManager = CallbackManager.Factory.create();
         loginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d("Tag", "Login 성공");
+                Log.d("Tag", "user id : " + permissionNeeds.get(0));
                 Intent intent = new Intent(getBaseContext(), HomeActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override
@@ -69,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -77,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), HomeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         facebookLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +101,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (AccessToken.getCurrentAccessToken() != null) { //이미 로그인 여부 확인//
                     Intent intent = new Intent(getBaseContext(), HomeActivity.class);
                     startActivity(intent);
-                    Log.d("Tag", "user id : " + AccessToken.getCurrentAccessToken().getUserId());
+
+                    finish();
+
+                    Log.d("Tag", "user id : " + AccessToken.getCurrentAccessToken().getToken());
+                    Log.d("Tag", "user id : " + permissionNeeds.get(1));
                 } else {
                     Log.d("Tag", "로그인을 하세요");
                 }
@@ -99,5 +118,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+
     }
 }

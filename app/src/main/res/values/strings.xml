@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MongDdangSeoul</string>
+    <string name="app_name">몽땅서울</string>
     <string name="facebook_app_id">135826177024008</string>
     <string name="fb_login_protocol_scheme">fb135826177024008</string>
 </resources>
