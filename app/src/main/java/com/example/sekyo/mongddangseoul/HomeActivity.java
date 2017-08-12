@@ -17,7 +17,6 @@ public class HomeActivity extends AppCompatActivity {
 
         // Tab
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-
         tabLayout.addTab(tabLayout.newTab().setIcon(
                 R.drawable.ic_home_white_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(
@@ -27,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         for(int i = 1; i< tabLayout.getTabCount(); i++){
-            tabLayout.getTabAt(i).getIcon().setColorFilter(getResources().getColor(R.color.grayColor), PorterDuff.Mode.SRC_IN);
+            tabLayout.getTabAt(i).getIcon().setColorFilter(getResources().getColor(R.color.shade), PorterDuff.Mode.SRC_IN);
         }
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -44,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                tab.getIcon().setColorFilter(getResources().getColor(R.color.grayColor), PorterDuff.Mode.SRC_IN);
+                tab.getIcon().setColorFilter(getResources().getColor(R.color.shade), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
