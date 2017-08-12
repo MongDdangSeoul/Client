@@ -18,15 +18,15 @@ public class HomeActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
         tabLayout.addTab(tabLayout.newTab().setIcon(
-                R.drawable.icon));
+                R.drawable.ic_home_white_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(
-                R.drawable.icon));
+                R.drawable.ic_star_white_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(
-                R.drawable.icon));
+                R.drawable.ic_person_white_24dp));
 
         tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         for(int i = 1; i< tabLayout.getTabCount(); i++){
-            tabLayout.getTabAt(i).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+            tabLayout.getTabAt(i).getIcon().setColorFilter(getResources().getColor(R.color.hintTextColor), PorterDuff.Mode.SRC_IN);
         }
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                tab.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+                tab.getIcon().setColorFilter(getResources().getColor(R.color.hintTextColor), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
