@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     private List<String> permissionNeeds = Arrays.asList("email");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,21 +43,23 @@ public class LoginActivity extends AppCompatActivity {
         loginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d("Tag","Login 성공");
+                Log.d("Tag", "Login 성공");
+                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(intent);
             }
 
             @Override
             public void onCancel() {
-                Log.d("Tag","Login 취소");
+                Log.d("Tag", "Login 취소");
             }
 
             @Override
             public void onError(FacebookException error) {
-                Log.d("Tag","Login 실패"+error.getLocalizedMessage());
+                Log.d("Tag", "Login 실패" + error.getLocalizedMessage());
             }
         });
-        loginButton = (Button)findViewById(R.id.login_button);
-        facebookLoginButton = (Button)findViewById(R.id.login_facebook_button);
+        loginButton = (Button) findViewById(R.id.login_button);
+        facebookLoginButton = (Button) findViewById(R.id.login_facebook_button);
         signUpButton = (Button) findViewById(R.id.sign_up_btn);
         idText = (EditText) findViewById(R.id.login_id);
         pwText = (EditText) findViewById(R.id.login_pw);
@@ -80,7 +84,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 loginManager.getInstance().logInWithReadPermissions(LoginActivity.this, permissionNeeds);
                 if (AccessToken.getCurrentAccessToken() != null) { //이미 로그인 여부 확인//
-                    //바로 인텐트 시작
+                    Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                    startActivity(intent);
                     Log.d("Tag", "user id : " + AccessToken.getCurrentAccessToken().getUserId());
                 } else {
                     Log.d("Tag", "로그인을 하세요");
@@ -89,9 +94,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
