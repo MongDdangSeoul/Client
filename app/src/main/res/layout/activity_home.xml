@@ -15,15 +15,23 @@
         android:elevation="2dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
-
+        <ImageView
+            android:padding="5dp"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/imageView"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="몽땅서울"
             android:textStyle="bold"
             android:textColor="#ffffff"
-            android:textSize="24dp" />
+            android:textSize="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView" />
 
         <ImageButton
             android:layout_width="30dp"
@@ -34,7 +42,8 @@
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_search_white_24dp" />
+            android:src="@drawable/ic_search_white_24dp"
+            android:id="@+id/imageButton" />
     </RelativeLayout>
 
         <android.support.design.widget.TabLayout
