@@ -74,7 +74,7 @@
         android:layout_alignLeft="@id/login_facebook_button"
         android:layout_below="@id/login_facebook_button"
         android:layout_marginTop="5dp"
-        android:text="로그인 유지"
+        android:text="아이디 저장"
         android:textSize="15sp" />
 
     <LinearLayout
