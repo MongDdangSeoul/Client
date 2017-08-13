@@ -35,7 +35,8 @@
         android:layout_below="@id/sign_up_id"
         android:background="@drawable/edittext_shape"
         android:hint="비밀번호"
-        android:lines="1" />
+        android:lines="1"
+        android:password="true" />
 
     <EditText
         android:id="@+id/sign_up_pw_check"
@@ -45,7 +46,8 @@
         android:layout_below="@id/sign_up_pw"
         android:background="@drawable/edittext_shape"
         android:hint="비밀번호 확인"
-        android:lines="1" />
+        android:lines="1"
+        android:password="true" />
 
     <EditText
         android:id="@+id/sign_up_name"
@@ -76,11 +78,13 @@
         android:background="@drawable/edittext_shape"
         android:hint="메일 주소"
         android:lines="1" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_below="@id/sign_up_mail"
         android:layout_centerHorizontal="true">
+
         <Button
             android:id="@+id/signup_cancel"
             style="@style/yelloButtonTheme"
@@ -92,8 +96,8 @@
         <Button
             android:id="@+id/signup_now"
             style="@style/greenButtonTheme"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
             android:text="회원가입"
             android:textColor="@color/whiteColor" />
 

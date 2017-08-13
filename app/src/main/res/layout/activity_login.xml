@@ -12,8 +12,8 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/icon" />
 
     <EditText
@@ -34,7 +34,8 @@
         android:layout_below="@id/login_id"
         android:background="@drawable/edittext_shape"
         android:hint="비밀번호"
-        android:lines="1" />
+        android:lines="1"
+        android:password="true" />
 
     <Button
         android:id="@+id/login_button"
@@ -79,10 +80,10 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/login_facebook_button"
+        android:layout_alignEnd="@+id/login_facebook_button"
         android:layout_alignRight="@+id/login_facebook_button"
-        android:layout_alignEnd="@+id/login_facebook_button">
+        android:layout_below="@+id/login_facebook_button"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/find_passward"
