@@ -30,9 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     Button signUpButton;
     EditText idText;
     EditText pwText;
-    EditText nameText;
-    EditText phoneText;
-    EditText mailText;
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     private List<String> permissionNeeds = Arrays.asList("email");
@@ -40,12 +37,19 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        loginButton = (Button) findViewById(R.id.login_button);
+        facebookLoginButton = (Button) findViewById(R.id.login_facebook_button);
+        signUpButton = (Button) findViewById(R.id.sign_up_btn);
+        idText = (EditText) findViewById(R.id.login_id);
+        pwText = (EditText) findViewById(R.id.login_pw);
+
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         if (BuildConfig.DEBUG) {
             FacebookSdk.setIsDebugEnabled(true);
             FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
         }
-        setContentView(R.layout.activity_login);
         /*자동로그인시 바로 넘어가게해놓음*/
 //        if (AccessToken.getCurrentAccessToken() != null) { //이미 로그인 여부 확인//
 //            Intent intent = new Intent(getBaseContext(), HomeActivity.class);
@@ -76,11 +80,24 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("Tag", "Login 실패" + error.getLocalizedMessage());
             }
         });
-        loginButton = (Button) findViewById(R.id.login_button);
-        facebookLoginButton = (Button) findViewById(R.id.login_facebook_button);
-        signUpButton = (Button) findViewById(R.id.sign_up_btn);
-        idText = (EditText) findViewById(R.id.login_id);
-        pwText = (EditText) findViewById(R.id.login_pw);
+
+        facebookLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginManager.getInstance().logInWithReadPermissions(LoginActivity.this, permissionNeeds);
+                if (AccessToken.getCurrentAccessToken() != null) { //이미 로그인 여부 확인//
+                    Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                    startActivity(intent);
+
+                    finish();
+
+                    Log.d("Tag", "user id : " + AccessToken.getCurrentAccessToken().getToken());
+                    Log.d("Tag", "user id : " + permissionNeeds.get(1));
+                } else {
+                    Log.d("Tag", "로그인을 하세요");
+                }
+            }
+        });
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +120,9 @@ public class LoginActivity extends AppCompatActivity {
                             public void onCompleted(Exception e, String result) {
                                 if(e == null) {
                                     if(result.equals("ok")){
+                                        LoginInfo.id = idText.getText().toString();
+                                        LoginInfo.pw = pwText.getText().toString();
+                                        Toast.makeText(getApplicationContext(), "로그인되었습니다.", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getBaseContext(), HomeActivity.class);
                                         startActivity(intent);
                                         finish();
@@ -118,23 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-            }
-        });
-        facebookLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginManager.getInstance().logInWithReadPermissions(LoginActivity.this, permissionNeeds);
-                if (AccessToken.getCurrentAccessToken() != null) { //이미 로그인 여부 확인//
-                    Intent intent = new Intent(getBaseContext(), HomeActivity.class);
-                    startActivity(intent);
-
-                    finish();
-
-                    Log.d("Tag", "user id : " + AccessToken.getCurrentAccessToken().getToken());
-                    Log.d("Tag", "user id : " + permissionNeeds.get(1));
-                } else {
-                    Log.d("Tag", "로그인을 하세요");
-                }
             }
         });
 
